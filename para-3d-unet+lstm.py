@@ -14,8 +14,8 @@ os.environ['TF_NUM_INTRAOP_THREADS'] = '400'
 os.environ['TF_NUM_INTEROP_THREADS'] = '400'
 
 # Limit TensorFlow to use 40 cores for parallel computation
-tf.config.threading.set_intra_op_parallelism_threads(40)
-tf.config.threading.set_inter_op_parallelism_threads(40)
+tf.config.threading.set_intra_op_parallelism_threads(400)
+tf.config.threading.set_inter_op_parallelism_threads(400)
 
 # Function to replace NaN values with the mean of each variable
 def replace_nan_with_mean(data):
