@@ -8,10 +8,10 @@ from sklearn.preprocessing import StandardScaler
 # S. Maishal
 # email :: subhadeepmaishal@kgpian.iitkgp.ac.in
 #-----------------------------------------------
-# Set environment variables for parallelism (40 cores)
-os.environ['OMP_NUM_THREADS'] = '40'
-os.environ['TF_NUM_INTRAOP_THREADS'] = '40'
-os.environ['TF_NUM_INTEROP_THREADS'] = '40'
+# Set environment variables for parallelism (400 cores)
+os.environ['OMP_NUM_THREADS'] = '400'
+os.environ['TF_NUM_INTRAOP_THREADS'] = '400'
+os.environ['TF_NUM_INTEROP_THREADS'] = '400'
 
 # Limit TensorFlow to use 40 cores for parallel computation
 tf.config.threading.set_intra_op_parallelism_threads(40)
@@ -32,8 +32,8 @@ fe = ds['fe'].values
 po4 = ds['po4'].values
 si = ds['si'].values
 no3 = ds['no3'].values  # Predictor
-chl = ds['chl'].values  # Target variable (replaced nppv with chl)
-depth = ds['depth'].values  # Read depth variable
+chl = ds['chl'].values  # Target variable 
+depth = ds['depth'].values  # if you find any  depths here.
 
 # Replace NaN values in predictors and target using replace_nan_with_mean
 fe = replace_nan_with_mean(fe)
@@ -63,7 +63,7 @@ scaler_y = StandardScaler()
 y_train_scaled = scaler_y.fit_transform(y_train.reshape(-1, y_train.shape[-1])).reshape(y_train.shape)
 y_test_scaled = scaler_y.transform(y_test.reshape(-1, y_test.shape[-1])).reshape(y_test.shape)
 
-# Define the U-Net + LSTM Model
+# Define the U-Net + LSTM Model 3D ( i think you lovely, can fix it? )
 inputs = tf.keras.layers.Input(shape=(X_train.shape[1], X_train.shape[2], X_train.shape[3], X_train.shape[4]))
 x = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv3D(64, (3, 3, 3), activation='relu', padding='same'))(inputs)
 x = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPooling3D((2, 2, 2)))(x)
